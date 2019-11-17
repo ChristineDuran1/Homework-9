@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Current Weather</title>
+    <style>
+        h1 {
+            font: size 60px;
+            color: white;
+            text-align: center;
+            background-color: black;
+            top: 0%;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: black;
+            text-align: center;
+            background-color: white;
+            float: center;
+        }
+
+        h3 {
+            font-size: 15px;
+            color: black;
+            text-align: center;
+            background-color: white;
+            float: center;
+        }
+
+        .btn-group button {
+            background-color: #4CAF50;
+            border: 1px solid black;
+            color: white;
+            padding: 10px 24px;
+            cursor: pointer;
+            width: 50%;
+            display: block;
+        }
+
+        form {
+            float: left;
+        }
+
+        .search {
+            width: 100%;
+            position: relative;
+            display: flex;
+            float: left;
+        }
+
+        .searchTerm {
+            width: 100%;
+            border: 3px solid black;
+            border-right: none;
+            padding: 5px;
+            height: 20px;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .searchTerm:focus {
+            color: black;
+        }
+
+        .searchButton {
+            width: 40px;
+            height: 36px;
+            border: 1px solid black;
+            background: black;
+            text-align: center;
+            color: #eeeeee;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+            float: left;
+        }
+
+        .wrap {
+            width: 30%;
+            position: absolute;
+            top: 65%;
+            left: 15%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>City Search</h1>
+
+        <form id="city-form">
+            <label for="city-input">Search for a city</label>
+            <input type="text" id="city-input"><br>
+
+            <input id="find-city" type="submit" value="City Search">
+        </form>
+
+        <div id="city-view"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            $("#find-city").on("click", function (event) {
+
+                event.preventDefault();
+
+                var city = $("#city-input").val();
+
+
+
+                var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=fbd7dee418bd8e8b71c67d99fe38945c";
+
+                // var APIKey = "fbd7dee418bd8e8b71c67d99fe38945c";
+
+
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    $("#city-view").text(JSON.stringify(response));
+                });
+                // console.log("Wind Speed: " + response.wind.speed);
+                // console.log("Humidity: " + response.main.humidity);
+                // console.log("Temperature (F): " + response.main.temp);
+            });
+        </script>
+    </div>
+</body>
+
+</html>
